@@ -33,6 +33,7 @@ footer {
 	position: absolute;
 	bottom: 0px;
 	box-shadow: 0 2px 12px 1px #777;
+	display: none;
 }
 
 h1 {
@@ -49,10 +50,16 @@ h1 {
 
 #about {
 	float: right;
+	margin-right: 10px;
 }
 
-div.control {
-	color: #e5e5e5;
+#new_game {
+	margin-left: 10px;
+}
+
+div.control {	
+	color: #eee;
+	text-shadow: 1px 1px 2px #555;
 	border: 1px solid white;
 	border-radius: 3px;
 	height: 40px;
@@ -81,28 +88,46 @@ div.control:hover {
 	left: 17px;
 }
 
-@media handheld {
-	footer {
-		height: 100px;
-	}
-
-	.field {
-		width: 300px;
-		height: 300px;
-		border: 1px solid white;
-		border-radius: 4.5px;
-		margin: 10px auto;
-		background-color: #dff;
-	}	
+#btn-box {
+	width: 150px;
+	height: 150px;
+	margin: 15px auto;
+	border: 1px solid white;
 }
 
-@media screen and (orientation: portrait;) {
+footer .ftr {
+	text-align: center;
+	font-size: 30px;
+}
+
+.ftr {
+	position: relative;
+}
+
+.up, .down {
+	left: 49px;
+}
+
+.right {
+	float: right;
+	bottom: 6.5px;
+}
+
+@media all and (orientation: portrait) {
+	footer {
+		height: 180px;
+		display: block;
+	}
+
+}
+
+@media screen and (max-width: 550px) {
 	.field {
 		width: 300px;
 		height: 300px;
 		border: 1px solid white;
 		border-radius: 4.5px;
-		margin: 10px auto;
+		margin: 15px auto;
 		background-color: #dff;
 	}
 }
