@@ -15,7 +15,7 @@
 
 
 body {
-	background-color: #bee;
+	background-color: #8fdfc9;
 }
 
 header {	
@@ -70,22 +70,23 @@ div.control {
 }
 
 div.control:hover {
-	background-color: #93d5d5;
+	background-color: #9eb;
 	color: #fff;
-	border-color: #ddd;
-	box-shadow: 0 0 1px 1px #ccc;
+	border-color: #bfb;
+	box-shadow: 0 0 1px 1px #cfc;
 	cursor: pointer;
 }
 
 .field {
-	width: 480px;
-	height: 480px;
+	width: 489px;
+	height: 489px;
 	border: 1px solid white;
 	border-radius: 7px;
 	margin: 50px auto;
-	background-color: #dff;
+	background-color: #bfb;
 	position: relative;
 	left: 17px;
+	padding: 3px;
 }
 
 #btn-box {
@@ -98,6 +99,7 @@ div.control:hover {
 footer .ftr {
 	text-align: center;
 	font-size: 30px;
+	background-color: #a3dfdf;
 }
 
 .ftr {
@@ -118,23 +120,40 @@ footer .ftr {
 	position: relative;
 	border: 1px dotted red;
 	font-size: 1px;
+	width: 10px;
+	height: 10px;
+	margin-right: 2px;
+	margin-bottom: 2px;
 }
 
 @media all and (orientation: portrait) {
 	footer {
 		height: 180px;
 		display: block;
+		background-color: #a3dfdf;
 	}
 
 }
 
 @media screen and (max-width: 550px) {
 	.field {
-		width: 280px;
-		height: 280px;
+		width: 310px;
+		height: 310px;
 		border: 1px solid white;
 		border-radius: 4.5px;
 		margin: 15px auto;
 		background-color: #dff;
 	}
+
+	.cube {
+		width: 6px;
+		height: 6px;
+		margin-right: 2px;
+		margin-bottom: 2px;
+	}
+}
+
+
+.snaked {
+	background-color: blue;
 }
