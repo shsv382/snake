@@ -29,11 +29,10 @@ function Snake() {
 	this.body = [[20,20]];
 	this.speed = 3;
 	this.direction = "right";
-	
-	this.timerId = null;
-	
-	var run = function() {	
-	  
+  	this.timerId = null;
+	this.food = [];
+
+	var checkDirection = function() {
 		switch(this.direction) {
 	  	    case 'right':
 	    		this.body[0][0]++;
@@ -47,18 +46,29 @@ function Snake() {
 	    	case 'top':
 	    		this.body[0][1]--;
 	    		break;
-			}
-						
+		}
+	}.bind(this);
+
+	var renewal = function() {
 		if (this.body[0][0] == 40) this.body[0][0] = 0;
 		if (this.body[0][1] == 40) this.body[0][1] = 0;
 		if (this.body[0][0] == -1) this.body[0][0] = 39;
 		if (this.body[0][1] == -1) this.body[0][1] = 39;
-		 
+	}.bind(this);
 
-    	$("#div-" + this.body[0][0] + "-" + this.body[0][1]).addClass("snaked");
+	var stepResults = function() {
 		console.log(this.body.toString());
-	  	console.log("Speed: " + this.speed);
+		console.log("Food: " + this.food);
+		console.log("Speed: " + this.speed);
+	}.bind(this)
+
+	var run = function() {	
+		checkDirection();
+		renewal();
+		stepResults();				
+    	$("#div-" + this.body[0][0] + "-" + this.body[0][1]).addClass("snaked");
   	}.bind(this);
+
   
   	this.go = function() {
     	run();
@@ -67,7 +77,18 @@ function Snake() {
   
   	this.stop = function() {
     	clearTimeout(this.timerId);
-  	} 
+  	};
+
+  	this.makeFood = function() {
+  		this.food = [];
+  		for (var i = 0; i < 2; i++) {
+  			this.food.push(Math.floor(Math.random() * 40));
+  		}
+  		for (i = 0; i < this.body.length; i++) {
+		    if (this.body[i] == this.food) this.makeFood.call(this);
+		}
+  		$("#div-" + this.food[0] + "-" + this.food[1]).addClass("food");
+  	};
 }
 
 
@@ -77,6 +98,9 @@ $(document).ready(function(){
 	var snake = new Snake();
 	$("#new_game").on('click', function() {
 		snake.go();
+		snake.makeFood();
+		snake.makeFood();
+		snake.makeFood();
 	});
 	$("#pause_game").on('click', function() {
 		snake.stop();
