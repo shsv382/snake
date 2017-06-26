@@ -92,7 +92,7 @@ div.control:hover {
 #btn-box {
 	width: 150px;
 	height: 150px;
-	margin: 15px auto;
+	margin: 7.5px auto;
 	border: 1px solid white;
 }
 
@@ -127,8 +127,12 @@ footer .ftr {
 }
 
 @media all and (orientation: portrait) {
+	.field {
+		margin: 15px auto;
+	}
+
 	footer {
-		height: 180px;
+		height: 170px;
 		display: block;
 		background-color: #a3dfdf;
 	}

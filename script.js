@@ -26,11 +26,11 @@ function addDiv(fld, size){
 
 
 function Snake() {
-	this.body = [[20,20]];
+	this.body = [[20,20],[19,20],[18,20]];
 	this.speed = 3;
 	this.direction = "right";
   	this.timerId = null;
-	this.food = [];
+	this.food = undefined;
 
 	var checkDirection = function() {
 		switch(this.direction) {
@@ -47,27 +47,36 @@ function Snake() {
 	    		this.body[0][1]--;
 	    		break;
 		}
+		for (var i = this.body.length - 1; i > 0; i--) {
+  			this.body[i] = this.body[i-1];		
+  		}	
 	}.bind(this);
 
 	var renewal = function() {
 		if (this.body[0][0] == 40) this.body[0][0] = 0;
-		if (this.body[0][1] == 40) this.body[0][1] = 0;
+		if (this.body[0][1] == 30) this.body[0][1] = 0;
 		if (this.body[0][0] == -1) this.body[0][0] = 39;
-		if (this.body[0][1] == -1) this.body[0][1] = 39;
+		if (this.body[0][1] == -1) this.body[0][1] = 29;
 	}.bind(this);
 
 	var stepResults = function() {
-		console.log(this.body.toString());
-		console.log("Food: " + this.food);
+		console.log(this.body.length);
 		console.log("Speed: " + this.speed);
 	}.bind(this)
 
-	var run = function() {	
+	var run = function() {		
 		checkDirection();
 		renewal();
-		stepResults();				
-    	$("#div-" + this.body[0][0] + "-" + this.body[0][1]).addClass("snaked");
-  	}.bind(this);
+		stepResults();		
+		makeFood();	
+		eat();
+		this.body.forEach(function(item, i, arr) {			
+    		$("#div-" + item[0] + "-" + item[1]).addClass("snaked");
+  		});
+  		var arr = this.body;
+  		
+  		this.speed = 2 + Math.floor(this.body.length / 3);
+	}.bind(this);
 
   
   	this.go = function() {
@@ -79,16 +88,25 @@ function Snake() {
     	clearTimeout(this.timerId);
   	};
 
-  	this.makeFood = function() {
-  		this.food = [];
-  		for (var i = 0; i < 2; i++) {
-  			this.food.push(Math.floor(Math.random() * 40));
+  	var makeFood = function() {
+  		if (!this.food) {
+	  		this.food = new Array(2);
+	  		this.food[0] = (Math.floor(Math.random() * 40));
+	  		this.food[1] = (Math.floor(Math.random() * 30));
+	  		$("#div-" + this.food[0] + "-" + this.food[1]).addClass("food");
+	  	}
+	  	return false;
+  	}.bind(this);
+
+  	var eat = function() {
+  		if (this.food[0] == this.body[0][0] &&
+  			this.food[1] == this.body[0][1]) {
+  			this.body.unshift(this.food);
+  			$("#div-" + this.food[0] + "-" + this.food[1]).removeClass("food");
+  			this.food = null;
   		}
-  		for (i = 0; i < this.body.length; i++) {
-		    if (this.body[i] == this.food) this.makeFood.call(this);
-		}
-  		$("#div-" + this.food[0] + "-" + this.food[1]).addClass("food");
-  	};
+  		return false;
+  	}.bind(this);
 }
 
 
@@ -98,9 +116,6 @@ $(document).ready(function(){
 	var snake = new Snake();
 	$("#new_game").on('click', function() {
 		snake.go();
-		snake.makeFood();
-		snake.makeFood();
-		snake.makeFood();
 	});
 	$("#pause_game").on('click', function() {
 		snake.stop();
