@@ -89,6 +89,16 @@ div.control:hover {
 	padding: 3px;
 }
 
+#current {
+	margin: 20px auto;
+	padding: 3px;
+	border: 1px solid white;
+	height: 50px;
+	width: 200px;
+	text-align: center;
+	line-height: 100%;
+}
+
 #btn-box {
 	width: 150px;
 	height: 150px;
@@ -118,7 +128,6 @@ footer .ftr {
 .cube {
 	display: inline-block;
 	position: relative;
-	border: 1px dotted red;
 	font-size: 1px;
 	width: 10px;
 	height: 10px;
@@ -139,29 +148,18 @@ footer .ftr {
 
 }
 
-@media screen and (max-width: 550px) {
-	.field {
-		width: 310px;
-		height: 310px;
-		border: 1px solid white;
-		border-radius: 4.5px;
-		margin: 15px auto;
-		background-color: #dff;
-	}
-
-	.cube {
-		width: 6px;
-		height: 6px;
-		margin-right: 2px;
-		margin-bottom: 2px;
-	}
-}
-
-
 .food {
 	background-color: red;
 }
 
 .snaked {
 	background-color: blue;
+}
+
+.gameover {
+	color: #faa;
+	background-color: #ffb;
+	font-size: 10em;
+	text-align: center;
+	padding-top: 77px;
 }
